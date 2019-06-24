@@ -32,15 +32,17 @@ const {
             await truffleAssert.passes(ownerap.addOwner(nonowner1))
         })
         it('the address is already owner', async() => {
-            await truffleAssert.reverts(ownerap.addOwner(owner3))
+            await truffleAssert.reverts(ownerap.addOwner(owner1))
         })
         it('address can not remove yourself', async() => {
             await truffleAssert.passes(ownerap.doApproval({from: owner1 }))
             await truffleAssert.reverts(ownerap.delOwner(owner1))
         })
-        // it('delete owner', async() => {
-        //     await truffleAssert.passes(ownerap.doApproval({from: owner2 }))
-        //     await truffleAssert.passes(ownerap.delOwner(owner1))
-        // })
+        it('delete owner', async() => {
+            await truffleAssert.passes(ownerap.doApproval({from: owner1 }))
+            await truffleAssert.passes(ownerap.addOwner(owner2))
+            await truffleAssert.passes(ownerap.doApproval({from: owner2 }))
+            await truffleAssert.passes(ownerap.delOwner(owner2, {from: owner1}))
+        })
     });
 })

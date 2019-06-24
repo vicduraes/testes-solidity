@@ -40,10 +40,11 @@ const {
             await truffleAssert.passes(ownerap.doApproval({from: owner1 }))
             await truffleAssert.reverts(ownerap.cancelApproval({from: nonowner2 }))
         })
-        // it('owner can reset all approvals', async() => {
-        //     await truffleAssert.passes(ownerap.doApproval({from: owner1 }))
-        //     await truffleAssert.passes(ownerap.doApproval({from: owner3 }))
-        //     await truffleAssert.passes(ownerap.resetAllApproval({from: owner1 }))
-        // })
+        it('owner can reset all approvals', async() => {
+            await truffleAssert.passes(ownerap.doApproval({from: owner1 }))
+            await truffleAssert.passes(ownerap.addOwner(owner3))
+            await truffleAssert.passes(ownerap.doApproval({from: owner3 }))
+            await truffleAssert.passes(ownerap.resetAllApproval({from: owner1 }))
+        })
     });
 })
