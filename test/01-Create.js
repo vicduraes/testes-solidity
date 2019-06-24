@@ -47,19 +47,9 @@ const {
             assert.equal(response, 1, 'quantOwner is wrong at create') 
         })
 
-        //O que mais deve ser verificado na criação do contrato? Se as aprovações estão zeradas
-    });
-
-    describe('Approval', function () {
-
-        it('owner can approve', async() => {
-            await truffleAssert.passes(ownerap.doApproval({from: owner1 }))
-            // await truffleAssert.eventEmitted(ownerap.doApproval({from: owner1 }))
+        it('check if arrayApproval = 0 at create', async() => {  
+            var response = await ownerap.arrayApproval(addressZero)
+            assert.equal(response, 0, 'arrayApproval is wrong at create') 
         })
-
-        it('nononwer cannont doApproval', async() => {
-            await truffleAssert.reverts(ownerap.doApproval({from: nonowner1 }))
-        })        
-        
     });
 })

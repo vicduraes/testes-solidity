@@ -35,14 +35,13 @@ contract Ownerap {
         _;
     }
     modifier ownerExist(address _address) {
-        require(owner[_address] == true, "owner not exists");
+        require(owner[_address] == true, "owner not exists"); // owner exists 
         _;
     }
     modifier ownerNotExist(address _address) {
-        require(owner[_address] == false, "owner exists");
+        require(owner[_address] == false, "owner exists"); // owner not exists
         _;
     }
-
 
     /*
     * @dev MinApproval functions
@@ -61,6 +60,7 @@ contract Ownerap {
     /*
     * @dev Owner functions
     */
+    
     event OwnerAdded(address indexed _address);
     event OwnerDeleted(address indexed _address);
     function addOwner(address _address) public onlyOwner onlyApproved ownerNotExist(_address) {
@@ -78,8 +78,6 @@ contract Ownerap {
         emit OwnerDeleted(_address);
         _clearAllApproval();
     }
-    
-
     /*
     * @dev Address approvals
     */
